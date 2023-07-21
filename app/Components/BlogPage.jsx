@@ -8,15 +8,18 @@ const BlogPage = ({ blogPosts }) => {
         <>
             <div className="flex flex-wrap">
                 {
-                    blogPosts && blogPosts.map((post, index) => (
-                        <BlogPost
-                            key={index}
-                            title={post.title}
-                            content={`${post.metadesc}...`}
-                            slug={post.slug}
-                            imageUrl={post.image}
-                        />
-                    ))
+                    blogPosts && blogPosts.map((post) => {
+                        return (
+                            <BlogPost
+                                key={post.$id}
+                                title={post.title}
+                                content={post.metadesc}
+                                imageUrl={post.image}
+                                slug={post.slug}
+                                id={post.$id}
+                            />
+                        )
+                    })
                 }
             </div>
         </>
