@@ -21,6 +21,7 @@
     "react-icons": "^4.10.1",
     "react-slick": "^0.29.0",
     "slick-carousel": "^1.8.1",
-    "tailwindcss": "3.3.3"
+    "tailwindcss": "3.3.3",
+    "uuid": "^9.0.0"
   }
 }

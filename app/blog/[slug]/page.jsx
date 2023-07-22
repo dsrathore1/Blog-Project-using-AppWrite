@@ -17,29 +17,24 @@ const BlogPage = ({ params }) => {
         params.slug  // DOCUMENT_ID
     );
 
-    // console.log(typeof (params.slug));
 
     React.useEffect(() => {
-        document.title = `Blogpost.com | ${data.title}`;
-
+        document.title = `Blogpost.com | Blog`;
         promise_getDocumentsById.then(function (res) {
-            // console.log(res);
             setData(res);
         });
     }, []);
 
 
     const handleDelete = (e) => {
-
         // Delete document
         databases.deleteDocument(
             process.env.NEXT_PUBLIC_DATABASE_ID,
             process.env.NEXT_PUBLIC_COLLECTION_ID,
             params.slug
         );
-        router.back();
-
-        console.log("Clicked");
+        router.push("/");
+        // console.log("Clicked");
     }
 
     return (
@@ -51,7 +46,7 @@ const BlogPage = ({ params }) => {
                 </div>
                 <p className="mt-3 text-xl text-gray-400" >{data.slug}</p>
                 {data.image && (
-                    <img src={data.image} alt={data.title} className="my-4 p-4 rounded-md" />
+                    <img src={data.image} alt={data.title} className="my-4 p-4 rounded-md object-fill" />
                 )}
                 <p className="text-gray-200 text-justify w-[80%]">{data.content}</p>
                 <div className="mt-6 flex space-x-4">
