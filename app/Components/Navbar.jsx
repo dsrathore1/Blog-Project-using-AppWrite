@@ -1,7 +1,14 @@
+import { account } from '@/appwrite/config';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import { AiFillPlusCircle } from "react-icons/ai";
+import { FaUserTie } from 'react-icons/fa';
 
 const Navbar = () => {
+
+    const isValid = account.get();
+
+
     return (
         <nav className="bg-gray-800 p-4 text-white">
             <div className="container mx-auto">
@@ -20,9 +27,13 @@ const Navbar = () => {
                             <Link href="/contact" className='text-white hover:text-indigo-500 transition'>Contact Us</Link>
                         </li>
                         <Link href="/newBlog" className="bg-white text-indigo-500 hover:bg-slate-200 active:translate-y-1 transition-all ease-in-out duration-[.3s] hover:text-indigo-600 flex items-center justify-center gap-2 px-4 py-2 rounded-md">Blog <AiFillPlusCircle size={24} /></Link>
-                        <button className="text-white bg-indigo-500 px-9 py-2 uppercase rounded-md">
-                            <Link href="/signUp">Login</Link>
-                        </button>
+                        {
+                            isValid ? <li>
+                                <Link href="/userProfile" className='text-white hover:text-indigo-500 transition'><FaUserTie size={30} /></Link>
+                            </li> : <button className="text-white bg-indigo-500 px-9 py-2 uppercase rounded-md">
+                                <Link href="/login">Login</Link>
+                            </button>
+                        }
                     </ul>
                 </div>
             </div>

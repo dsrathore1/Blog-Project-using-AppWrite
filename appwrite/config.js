@@ -1,13 +1,20 @@
-import { Client, Databases } from "appwrite";
+import { Client, Databases, Account, ID } from "appwrite";
 
 export const client = new Client();
 
 client
     .setEndpoint(process.env.NEXT_PUBLIC_ENDPOINT) // Your API Endpoint
     .setProject(process.env.NEXT_PUBLIC_PROJECT_ID) // Your project ID
-    ;
 
+
+//* Create a client's database
 export const databases = new Databases(client);
+
+//* Create an Account 
+export const account = new Account(client);
+
+//* Unique ID
+export const uid = ID.unique();
 
 //* This is will only provide single data/document 
 export const promise_getDocuments = databases.getDocument(
