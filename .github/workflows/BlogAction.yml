@@ -1,10 +1,21 @@
-name: Blogpost.com
-on: push
+name: Blogpost.com Actions
+
+on:
+  push:
+    branches: [main]
+
 jobs:
-  my-job:
+  lintTest:
+    name: lint
     runs-on: ubuntu-latest
     steps:
-      - name: my-step
-        run: echo "Hello World"
-      - name: my-step2
-        run: echo "Step 2"
+      - name: Clone the repository
+        uses: actions/checkout@v2
+      - name: Install Dependencies
+        run: |
+          echo "Installing Dependencies"
+          npm install
+      - name: Run Linting
+        run: |
+          echo "Running Lint..."
+          npm run lint
