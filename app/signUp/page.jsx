@@ -5,13 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { AiFillEye, AiFillEyeInvisible, AiOutlineLogin } from 'react-icons/ai';
 import { FaGoogle, FaGithub } from 'react-icons/fa';
 
-import { account, uid } from '@/appwrite/config';
-import { useRouter } from 'next/navigation';
-
-
-
 const SignUpModal = () => {
-    const router = useRouter();
 
     const [userDetails, setUserDetails] = useState({
         username: '',
@@ -23,36 +17,6 @@ const SignUpModal = () => {
     useEffect(() => {
         document.title = "Blogpost.com | Sign Up"
     });
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-
-            await account.create(
-                uid,
-                userDetails.email,
-                userDetails.password,
-                userDetails.username
-            );
-
-            //* Create a Session
-            await account.createEmailSession(userDetails.email, userDetails.password);
-
-            //* After submission
-            setUserDetails({
-                username: '',
-                email: '',
-                password: "",
-            });
-
-            //* Push to the home page
-            router.push("/");
-
-        } catch (error) {
-            console.log(error);
-        }
-
-    }
 
     return (
         <div className="fixed inset-0 flex items-center justify-center z-10">
@@ -108,9 +72,7 @@ const SignUpModal = () => {
                     </div>
                 </div>
                 <div className="flex justify-between flex-col items-center mb-4">
-                    <button
-                        onClick={handleSubmit}
-                        className="w-full h-[3rem] flex justify-center items-center gap-3 font-bold uppercase bg-indigo-500 text-white px-4 py-2 rounded-lg focus:outline-none"
+                    <button className="w-full h-[3rem] flex justify-center items-center gap-3 font-bold uppercase bg-indigo-500 text-white px-4 py-2 rounded-lg focus:outline-none"
                     >
                         Sign Up <AiOutlineLogin className='rotate-180' size={24} />
                     </button>
